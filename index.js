@@ -156,6 +156,17 @@ app.post('/bookings', async (req, res) => {
 });
 
 
+// seacrh
+app.get('/search', async (req, res) => {
+  const search_text = req.query.search
+  const result = await modelCollections.find({
+    vehicleName :{$regex: search_text, $options: 'i' }
+  }).toArray();
+  res.send(result);
+
+});
+
+
 
 
 
