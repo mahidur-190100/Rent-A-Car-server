@@ -28,9 +28,10 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
     const db = client.db("aas_10DB");
     const modelCollections = db.collection("models");
+    const bookingCollections =db.collection("bookings")
 
     // find,findOne
     app.get("/models", async (req, res) => {
@@ -87,25 +88,6 @@ async function run() {
   }
 })
 
-    // app.put("/models/:id",  async (req, res) => {
-    //   const { id } = req.params;
-    //   const data = req.body;
-    //   // console.log(id)
-    //   // console.log(data)
-    //   const objectId = new ObjectId(id);
-    //   const filter = { _id: objectId };
-    //   const update = {
-    //     $set: data,
-    //   };
-
-    //   const result = await modelCollection.updateOne(filter, update);
-
-    //   res.send({
-    //     success: true,
-    //     result,
-    //   });
-    // });
-
 
     // delete ,deleteOne, deleteMany
     app.delete("/models/:id", async (req, res) => {
@@ -146,16 +128,6 @@ app.get('/my-models', async (req, res) => {
 
 })
 
-
-// booking
-app.post('/bookings', async (req, res) => {
-  const booking = req.body;
-  // console.log(booking);
-  const result = await bookingCollections.insertOne(booking);
-  res.send(result)
-});
-
-
 // seacrh
 app.get('/search', async (req, res) => {
   const search_text = req.query.search
@@ -167,14 +139,8 @@ app.get('/search', async (req, res) => {
 });
 
 
-
-
-
-
-
-
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
+    // await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
     );
@@ -189,9 +155,7 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
-// id assignment-10DBUser
-// passwod WtWxA6JV75EII5Te
-// WtWxA6JV75EII5Te
+
 
 
 
