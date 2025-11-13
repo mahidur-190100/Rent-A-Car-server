@@ -31,7 +31,7 @@ async function run() {
     // await client.connect();
     const db = client.db("aas_10DB");
     const modelCollections = db.collection("models");
-    const bookingCollections =db.collection("bookings")
+    // const bookingCollections =db.collection("bookings")
 
     // find,findOne
     app.get("/models", async (req, res) => {
